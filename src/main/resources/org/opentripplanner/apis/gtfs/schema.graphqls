@@ -846,6 +846,19 @@ enum BikesAllowed {
     NOT_ALLOWED
 }
 
+enum CarsAllowed {
+    """There is no car information for the trip."""
+    NO_INFORMATION
+
+    """
+    The vehicle being used on this particular trip can accommodate at least one car.
+    """
+    ALLOWED
+
+    """No cars are allowed on this trip."""
+    NOT_ALLOWED
+}
+
 """
 Preferences related to travel with a bicycle.
 """
@@ -4475,6 +4488,7 @@ type Route implements Node {
     """
     textColor: String
     bikesAllowed: BikesAllowed
+    carsAllowed: CarsAllowed
 
     """List of patterns which operate on this route"""
     patterns: [Pattern]
@@ -5327,6 +5341,9 @@ type Trip implements Node {
 
     """Whether bikes are allowed on board the vehicle running this trip"""
     bikesAllowed: BikesAllowed
+
+    """Whether cars are allowed on board the vehicle running this trip"""
+    carsAllowed: CarsAllowed
 
     """The pattern the trip is running on"""
     pattern: Pattern
