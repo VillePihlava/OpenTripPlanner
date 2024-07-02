@@ -140,6 +140,13 @@ public class LineType {
       .field(
         GraphQLFieldDefinition
           .newFieldDefinition()
+          .name("carsAllowed")
+          .type(EnumTypes.CARS_ALLOWED)
+          .build()
+      )
+      .field(
+        GraphQLFieldDefinition
+          .newFieldDefinition()
           .name("journeyPatterns")
           .type(new GraphQLList(journeyPatternType))
           .dataFetcher(environment ->

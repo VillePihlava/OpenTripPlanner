@@ -168,6 +168,14 @@ public class ServiceJourneyType {
       .field(
         GraphQLFieldDefinition
           .newFieldDefinition()
+          .name("carsAllowed")
+          .type(EnumTypes.CARS_ALLOWED)
+          .description("Whether cars are allowed on service journey.")
+          .build()
+      )
+      .field(
+        GraphQLFieldDefinition
+          .newFieldDefinition()
           .name("journeyPattern")
           .description(
             "JourneyPattern for the service journey, according to scheduled data. If the " +
