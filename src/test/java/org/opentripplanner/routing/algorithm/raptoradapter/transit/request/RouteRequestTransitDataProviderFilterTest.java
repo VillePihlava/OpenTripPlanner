@@ -108,6 +108,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
+      false,
       true,
       accessibility,
       false,
@@ -159,6 +160,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       DEFAULT_ACCESSIBILITY,
       false,
       includeRealtimeCancellations,
@@ -204,6 +206,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       DEFAULT_ACCESSIBILITY,
       false,
       false,
@@ -221,6 +224,7 @@ class RouteRequestTransitDataProviderFilterTest {
     TripPatternForDate tripPatternForDate = createTestTripPatternForDate();
 
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,
@@ -255,6 +259,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       DEFAULT_ACCESSIBILITY,
       false,
       false,
@@ -281,6 +286,7 @@ class RouteRequestTransitDataProviderFilterTest {
     );
 
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,
@@ -318,6 +324,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       DEFAULT_ACCESSIBILITY,
       false,
       false,
@@ -347,6 +354,7 @@ class RouteRequestTransitDataProviderFilterTest {
     );
 
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,
@@ -421,6 +429,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       DEFAULT_ACCESSIBILITY,
       false,
       false,
@@ -447,6 +456,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     var filter = new RouteRequestTransitDataProviderFilter(
       true,
+      false,
       true,
       WheelchairPreferences.DEFAULT,
       false,
@@ -473,6 +483,7 @@ class RouteRequestTransitDataProviderFilterTest {
     );
 
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       true,
       WheelchairPreferences.DEFAULT,
@@ -501,6 +512,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     var filter = new RouteRequestTransitDataProviderFilter(
       false,
+      false,
       true,
       WheelchairPreferences.DEFAULT,
       false,
@@ -527,6 +539,7 @@ class RouteRequestTransitDataProviderFilterTest {
     );
 
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       true,
       WheelchairPreferences.DEFAULT,
@@ -568,6 +581,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter1 = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       WheelchairPreferences.DEFAULT,
       true,
       false,
@@ -587,6 +601,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     // Given
     var filter2 = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,
@@ -634,6 +649,7 @@ class RouteRequestTransitDataProviderFilterTest {
     var filter1 = new RouteRequestTransitDataProviderFilter(
       false,
       false,
+      false,
       WheelchairPreferences.DEFAULT,
       false,
       true,
@@ -653,6 +669,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     // Given
     var filter2 = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,
@@ -768,6 +785,7 @@ class RouteRequestTransitDataProviderFilterTest {
 
     var filter = new RouteRequestTransitDataProviderFilter(
       true,
+      false,
       true,
       DEFAULT_ACCESSIBILITY,
       false,
@@ -790,6 +808,7 @@ class RouteRequestTransitDataProviderFilterTest {
     TripTimes tripTimes
   ) {
     var filter = new RouteRequestTransitDataProviderFilter(
+      false,
       false,
       false,
       DEFAULT_ACCESSIBILITY,

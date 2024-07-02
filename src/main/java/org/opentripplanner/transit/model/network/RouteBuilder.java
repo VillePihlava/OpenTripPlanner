@@ -30,6 +30,7 @@ public final class RouteBuilder extends AbstractEntityBuilder<Route, RouteBuilde
   private String color;
   private String textColor;
   private BikeAccess bikesAllowed = BikeAccess.UNKNOWN;
+  private CarAccess carsAllowed = CarAccess.UNKNOWN;
 
   RouteBuilder(FeedScopedId id) {
     super(id);
@@ -53,6 +54,7 @@ public final class RouteBuilder extends AbstractEntityBuilder<Route, RouteBuilde
     this.color = original.getColor();
     this.textColor = original.getTextColor();
     this.bikesAllowed = original.getBikesAllowed();
+    this.carsAllowed = original.getCarsAllowed();
   }
 
   public Agency getAgency() {
@@ -175,8 +177,17 @@ public final class RouteBuilder extends AbstractEntityBuilder<Route, RouteBuilde
     return bikesAllowed;
   }
 
+  public CarAccess getCarsAllowed() {
+    return carsAllowed;
+  }
+
   public RouteBuilder withBikesAllowed(BikeAccess bikesAllowed) {
     this.bikesAllowed = bikesAllowed;
+    return this;
+  }
+
+  public RouteBuilder withCarsAllowed(CarAccess carsAllowed) {
+    this.carsAllowed = carsAllowed;
     return this;
   }
 
