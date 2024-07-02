@@ -23,6 +23,7 @@ import org.opentripplanner.transit.model.basic.Accessibility;
 import org.opentripplanner.transit.model.basic.TransitMode;
 import org.opentripplanner.transit.model.network.BikeAccess;
 import org.opentripplanner.transit.model.site.StopTransferPriority;
+import org.opentripplanner.transit.model.network.CarAccess;
 import org.opentripplanner.transit.model.timetable.Direction;
 import org.opentripplanner.transit.model.timetable.OccupancyStatus;
 import org.opentripplanner.transit.model.timetable.RealTimeState;
@@ -82,6 +83,18 @@ public class EnumTypes {
       "The vehicle being used on this particular trip can accommodate at least one bicycle."
     )
     .value("notAllowed", BikeAccess.NOT_ALLOWED, "No bicycles are allowed on this trip.")
+    .build();
+
+  public static final GraphQLEnumType CARS_ALLOWED = GraphQLEnumType
+    .newEnum()
+    .name("CarsAllowed")
+    .value("noInformation", CarAccess.UNKNOWN, "There is no car information for the trip.")
+    .value(
+      "allowed",
+      CarAccess.ALLOWED,
+      "The vehicle being used on this particular trip can accommodate at least one car."
+    )
+    .value("notAllowed", CarAccess.NOT_ALLOWED, "No cars are allowed on this trip.")
     .build();
 
   public static final GraphQLEnumType BOOKING_METHOD = GraphQLEnumType

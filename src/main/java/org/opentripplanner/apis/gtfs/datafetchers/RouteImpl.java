@@ -13,9 +13,11 @@ import org.opentripplanner.apis.gtfs.PatternByServiceDatesFilter;
 import org.opentripplanner.apis.gtfs.generated.GraphQLDataFetchers;
 import org.opentripplanner.apis.gtfs.generated.GraphQLTypes;
 import org.opentripplanner.apis.gtfs.generated.GraphQLTypes.GraphQLBikesAllowed;
+import org.opentripplanner.apis.gtfs.generated.GraphQLTypes.GraphQLCarsAllowed;
 import org.opentripplanner.apis.gtfs.generated.GraphQLTypes.GraphQLTransitMode;
 import org.opentripplanner.apis.gtfs.mapping.BikesAllowedMapper;
 import org.opentripplanner.apis.gtfs.support.time.LocalDateRangeUtil;
+import org.opentripplanner.apis.gtfs.mapping.CarsAllowedMapper;
 import org.opentripplanner.routing.alertpatch.EntitySelector;
 import org.opentripplanner.routing.alertpatch.TransitAlert;
 import org.opentripplanner.routing.services.TransitAlertService;
@@ -137,6 +139,11 @@ public class RouteImpl implements GraphQLDataFetchers.GraphQLRoute {
   @Override
   public DataFetcher<GraphQLBikesAllowed> bikesAllowed() {
     return environment -> BikesAllowedMapper.map(getSource(environment).getBikesAllowed());
+  }
+
+  @Override
+  public DataFetcher<GraphQLCarsAllowed> carsAllowed() {
+    return environment -> CarsAllowedMapper.map(getSource(environment).getCarsAllowed());
   }
 
   @Override
