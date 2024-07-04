@@ -126,9 +126,11 @@ public class QualifiedModeSet implements Serializable {
             mBuilder.withEgressMode(StreetMode.CAR_HAILING);
             mBuilder.withDirectMode(StreetMode.WALK);
           } else {
-            mBuilder.withAccessMode(StreetMode.WALK);
-            mBuilder.withTransferMode(StreetMode.WALK);
-            mBuilder.withEgressMode(StreetMode.WALK);
+            // TODO withAccessMode, withTransferMode, and withEgressMode where set to StreetMode.WALK previously.
+            // does changing this break anything?
+            mBuilder.withAccessMode(StreetMode.CAR);
+            mBuilder.withTransferMode(StreetMode.CAR);
+            mBuilder.withEgressMode(StreetMode.CAR);
             mBuilder.withDirectMode(StreetMode.CAR);
           }
         }
