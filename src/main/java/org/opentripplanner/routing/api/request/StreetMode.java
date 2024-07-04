@@ -38,8 +38,9 @@ public enum StreetMode implements DocumentedEnum<StreetMode> {
    * Car only
    * <p>
    * Direct mode only.
+   * TODO not direct mode only
    */
-  CAR(Feature.ACCESS, Feature.DRIVING),
+  CAR(Feature.ACCESS, Feature.TRANSFER, Feature.EGRESS, Feature.DRIVING),
   /**
    * Start in the car, drive to a parking area, and walk the rest of the way.
    * <p>
