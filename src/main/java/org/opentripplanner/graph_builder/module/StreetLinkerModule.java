@@ -113,7 +113,10 @@ public class StreetLinkerModule implements GraphBuilderModule {
       }
 
       // ordinarily stops only need to be accessible by foot
-      StopLinkType linkType = StopLinkType.WALK_ONLY;
+
+      // TODO fix this - this is a temporary solution to enable cars to access transit stops for car ferry use.
+      //StopLinkType linkType = StopLinkType.WALK_ONLY;
+      StopLinkType linkType = StopLinkType.WALK_AND_CAR;
 
       if (
         OTPFeature.FlexRouting.isOn() && stopLocationsUsedForFlexTrips.contains(tStop.getStop())
