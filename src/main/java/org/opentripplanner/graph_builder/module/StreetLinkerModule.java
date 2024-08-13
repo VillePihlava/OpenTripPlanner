@@ -25,6 +25,7 @@ import org.opentripplanner.street.model.vertex.TransitStopVertex;
 import org.opentripplanner.street.model.vertex.VehicleParkingEntranceVertex;
 import org.opentripplanner.street.search.TraverseMode;
 import org.opentripplanner.street.search.TraverseModeSet;
+import org.opentripplanner.transit.model.network.CarAccess;
 import org.opentripplanner.transit.model.site.GroupStop;
 import org.opentripplanner.transit.model.site.RegularStop;
 import org.opentripplanner.transit.model.site.StopLocation;
@@ -102,6 +103,31 @@ public class StreetLinkerModule implements GraphBuilderModule {
       );
     }
 
+    // The stops that are used by transport capable of transporting cars need to be connected to the road network (e.g. car ferries).
+    Set<StopLocation> stopLocationsUsedForCarsAllowedTrips = Set.of();
+    stopLocationsUsedForCarsAllowedTrips =
+      transitModel
+        .getAllTripPatterns()
+        .stream()
+        .filter(t ->
+          t
+            .getScheduledTimetable()
+            .getTripTimes()
+            .stream()
+            .anyMatch(tt -> tt.getTrip().getCarsAllowed() == CarAccess.ALLOWED)
+        )
+        .flatMap(t -> t.getStops().stream())
+        .collect(Collectors.toSet());
+
+    stopLocationsUsedForCarsAllowedTrips.addAll(
+      stopLocationsUsedForCarsAllowedTrips
+        .stream()
+        .filter(GroupStop.class::isInstance)
+        .map(GroupStop.class::cast)
+        .flatMap(g -> g.getChildLocations().stream().filter(RegularStop.class::isInstance))
+        .toList()
+    );
+
     for (TransitStopVertex tStop : vertices) {
       // Stops with pathways do not need to be connected to the street network, since there are explicit entrances defined for that
       if (tStop.hasPathways()) {
@@ -114,12 +140,13 @@ public class StreetLinkerModule implements GraphBuilderModule {
 
       // ordinarily stops only need to be accessible by foot
 
-      // TODO fix this - this is a temporary solution to enable cars to access transit stops for car ferry use.
-      //StopLinkType linkType = StopLinkType.WALK_ONLY;
-      StopLinkType linkType = StopLinkType.WALK_AND_CAR;
+      StopLinkType linkType = StopLinkType.WALK_ONLY;
 
       if (
-        OTPFeature.FlexRouting.isOn() && stopLocationsUsedForFlexTrips.contains(tStop.getStop())
+        (
+          OTPFeature.FlexRouting.isOn() && stopLocationsUsedForFlexTrips.contains(tStop.getStop())
+        ) ||
+        stopLocationsUsedForCarsAllowedTrips.contains(tStop.getStop())
       ) {
         linkType = StopLinkType.WALK_AND_CAR;
       }
