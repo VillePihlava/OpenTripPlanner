@@ -139,7 +139,6 @@ public class StreetLinkerModule implements GraphBuilderModule {
       }
 
       // ordinarily stops only need to be accessible by foot
-
       StopLinkType linkType = StopLinkType.WALK_ONLY;
 
       if (

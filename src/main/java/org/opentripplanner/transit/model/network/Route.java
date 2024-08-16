@@ -39,7 +39,6 @@ public final class Route extends AbstractTransitEntity<Route, RouteBuilder> impl
   private final String color;
   private final String textColor;
   private final BikeAccess bikesAllowed;
-  private final CarAccess carsAllowed;
 
   Route(RouteBuilder builder) {
     super(builder.getId());
@@ -47,7 +46,6 @@ public final class Route extends AbstractTransitEntity<Route, RouteBuilder> impl
     this.agency = requireNonNull(builder.getAgency());
     this.mode = requireNonNull(builder.getMode());
     this.bikesAllowed = requireNonNullElse(builder.getBikesAllowed(), BikeAccess.UNKNOWN);
-    this.carsAllowed = requireNonNullElse(builder.getCarsAllowed(), CarAccess.UNKNOWN);
     // One of short- or long- name is required
     this.shortName = builder.getShortName();
     this.longName = builder.getLongName();
@@ -90,8 +88,7 @@ public final class Route extends AbstractTransitEntity<Route, RouteBuilder> impl
       Objects.equals(this.url, other.url) &&
       Objects.equals(this.color, other.color) &&
       Objects.equals(this.textColor, other.textColor) &&
-      Objects.equals(this.bikesAllowed, other.bikesAllowed) &&
-      Objects.equals(this.carsAllowed, other.carsAllowed)
+      Objects.equals(this.bikesAllowed, other.bikesAllowed)
     );
   }
 
@@ -186,11 +183,6 @@ public final class Route extends AbstractTransitEntity<Route, RouteBuilder> impl
   @Nonnull
   public BikeAccess getBikesAllowed() {
     return bikesAllowed;
-  }
-
-  @Nonnull
-  public CarAccess getCarsAllowed() {
-    return carsAllowed;
   }
 
   /**

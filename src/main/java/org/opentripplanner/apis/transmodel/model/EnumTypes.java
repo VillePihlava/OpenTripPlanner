@@ -85,18 +85,6 @@ public class EnumTypes {
     .value("notAllowed", BikeAccess.NOT_ALLOWED, "No bicycles are allowed on this trip.")
     .build();
 
-  public static final GraphQLEnumType CARS_ALLOWED = GraphQLEnumType
-    .newEnum()
-    .name("CarsAllowed")
-    .value("noInformation", CarAccess.UNKNOWN, "There is no car information for the trip.")
-    .value(
-      "allowed",
-      CarAccess.ALLOWED,
-      "The vehicle being used on this particular trip can accommodate at least one car."
-    )
-    .value("notAllowed", CarAccess.NOT_ALLOWED, "No cars are allowed on this trip.")
-    .build();
-
   public static final GraphQLEnumType BOOKING_METHOD = GraphQLEnumType
     .newEnum()
     .name("BookingMethod")

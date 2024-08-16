@@ -1833,7 +1833,6 @@ type Route implements Node {
     types: [RouteAlertType]
   ): [Alert]
   bikesAllowed: BikesAllowed
-  carsAllowed: CarsAllowed
   """
   The color (in hexadecimal format) the agency operating this route would prefer
   to use on UI elements (e.g. polylines on a map) related to this route. This

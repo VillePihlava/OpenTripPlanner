@@ -13,10 +13,6 @@ class CarAccessMapper {
     return mapValues(rhs.getCarsAllowed());
   }
 
-  public static CarAccess mapForRoute(Route rhs) {
-    return mapValues(rhs.getCarsAllowed());
-  }
-
   private static CarAccess mapValues(int carsAllowed) {
     switch (carsAllowed) {
       case 1:

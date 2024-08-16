@@ -54,7 +54,7 @@ public final class Trip extends AbstractTransitEntity<Trip, TripBuilder> impleme
         : route.getNetexSubmode();
     this.direction = requireNonNullElse(builder.getDirection(), Direction.UNKNOWN);
     this.bikesAllowed = requireNonNullElse(builder.getBikesAllowed(), route.getBikesAllowed());
-    this.carsAllowed = requireNonNullElse(builder.getCarsAllowed(), route.getCarsAllowed());
+    this.carsAllowed = requireNonNull(builder.getCarsAllowed());
     this.wheelchairBoarding =
       requireNonNullElse(builder.getWheelchairBoarding(), Accessibility.NO_INFORMATION);
     this.netexAlteration = requireNonNullElse(builder.getNetexAlteration(), TripAlteration.PLANNED);

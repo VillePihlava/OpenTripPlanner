@@ -90,11 +90,7 @@ public class RouteRequestTransitDataProviderFilter implements TransitDataProvide
   }
 
   public static CarAccess carAccessForTrip(Trip trip) {
-    if (trip.getCarsAllowed() != CarAccess.UNKNOWN) {
-      return trip.getCarsAllowed();
-    }
-
-    return trip.getRoute().getCarsAllowed();
+    return trip.getCarsAllowed();
   }
 
   @Override

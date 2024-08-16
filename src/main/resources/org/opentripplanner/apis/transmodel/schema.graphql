@@ -385,7 +385,6 @@ type Leg {
 type Line {
   authority: Authority
   bikesAllowed: BikesAllowed
-  carsAllowed: CarsAllowed
   "Booking arrangements for flexible line."
   bookingArrangements: BookingArrangement @deprecated(reason : "BookingArrangements are defined per stop, and can be found under `passingTimes` or `estimatedCalls`")
   branding: Branding
@@ -1091,8 +1090,6 @@ type ServiceJourney {
   activeDates: [Date]! @timingData
   "Whether bikes are allowed on service journey."
   bikesAllowed: BikesAllowed
-  "Whether cars are allowed on service journey."
-  carsAllowed: CarsAllowed
   "Booking arrangements for flexible services."
   bookingArrangements: BookingArrangement @deprecated(reason : "BookingArrangements are defined per stop, and can be found under `passingTimes` or `estimatedCalls`")
   directionType: DirectionType
@@ -1490,15 +1487,6 @@ enum BikesAllowed {
   "There is no bike information for the trip."
   noInformation
   "No bicycles are allowed on this trip."
-  notAllowed
-}
-
-enum CarsAllowed {
-  "The vehicle being used on this particular trip can accommodate at least one car."
-  allowed
-  "There is no car information for the trip."
-  noInformation
-  "No cars are allowed on this trip."
   notAllowed
 }
 

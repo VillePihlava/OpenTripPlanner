@@ -921,8 +921,6 @@ public class GraphQLDataFetchers {
 
     public DataFetcher<GraphQLBikesAllowed> bikesAllowed();
 
-    public DataFetcher<GraphQLCarsAllowed> carsAllowed();
-
     public DataFetcher<String> color();
 
     public DataFetcher<String> desc();
