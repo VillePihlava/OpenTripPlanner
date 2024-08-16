@@ -2,9 +2,7 @@
 package org.opentripplanner.apis.gtfs.generated;
 
 import graphql.relay.Connection;
-import graphql.relay.Connection;
 import graphql.relay.DefaultEdge;
-import graphql.relay.Edge;
 import graphql.relay.Edge;
 import graphql.schema.DataFetcher;
 import graphql.schema.TypeResolver;
