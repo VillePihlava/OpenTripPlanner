@@ -34,6 +34,7 @@ import org.opentripplanner.transit.model.basic.TransitMode;
 import org.opentripplanner.transit.model.framework.Deduplicator;
 import org.opentripplanner.transit.model.framework.FeedScopedId;
 import org.opentripplanner.transit.model.network.BikeAccess;
+import org.opentripplanner.transit.model.network.CarAccess;
 import org.opentripplanner.transit.model.network.Route;
 import org.opentripplanner.transit.model.network.RouteBuilder;
 import org.opentripplanner.transit.model.network.RoutingTripPattern;
@@ -250,6 +251,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -394,6 +396,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       TransmodelTransportSubmode.LOCAL_BUS.getValue(),
       Accessibility.NOT_POSSIBLE,
@@ -420,6 +423,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -448,6 +452,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -471,11 +476,41 @@ class RouteRequestTransitDataProviderFilterTest {
   }
 
   @Test
+  void carsAllowedFilteringTest() {
+    TripTimes tripTimes = createTestTripTimes(
+      TRIP_ID,
+      ROUTE,
+      BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
+      TransitMode.BUS,
+      null,
+      Accessibility.NOT_POSSIBLE,
+      null
+    );
+
+    var filter = new RouteRequestTransitDataProviderFilter(
+      false,
+      true,
+      true,
+      WheelchairPreferences.DEFAULT,
+      false,
+      false,
+      Set.of(),
+      List.of(AllowAllTransitFilter.of())
+    );
+
+    boolean valid = filter.tripTimesPredicate(tripTimes, true);
+
+    assertFalse(valid);
+  }
+
+  @Test
   void removeInaccessibleTrip() {
     TripTimes tripTimes = createTestTripTimes(
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -504,6 +539,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.POSSIBLE,
@@ -532,6 +568,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -562,6 +599,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -571,6 +609,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -628,6 +667,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -638,6 +678,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -727,11 +768,33 @@ class RouteRequestTransitDataProviderFilterTest {
   }
 
   @Test
+  void testCarsAllowed() {
+    RouteBuilder routeBuilder = TransitModelForTest.route("1");
+    TripBuilder trip = Trip.of(TransitModelForTest.id("T1")).withRoute(routeBuilder.build());
+
+    assertEquals(
+      CarAccess.UNKNOWN,
+      RouteRequestTransitDataProviderFilter.carAccessForTrip(trip.build())
+    );
+    trip.withCarsAllowed(CarAccess.ALLOWED);
+    assertEquals(
+      CarAccess.ALLOWED,
+      RouteRequestTransitDataProviderFilter.carAccessForTrip(trip.build())
+    );
+    trip.withCarsAllowed(CarAccess.NOT_ALLOWED);
+    assertEquals(
+      CarAccess.NOT_ALLOWED,
+      RouteRequestTransitDataProviderFilter.carAccessForTrip(trip.build())
+    );
+  }
+
+  @Test
   void multipleFilteringTest() {
     TripTimes matchingTripTimes = createTestTripTimes(
       TRIP_ID,
       ROUTE,
       BikeAccess.ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.POSSIBLE,
@@ -741,6 +804,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.RAIL,
       null,
       Accessibility.POSSIBLE,
@@ -750,6 +814,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.RAIL,
       null,
       Accessibility.POSSIBLE,
@@ -759,6 +824,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.RAIL,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -768,6 +834,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.NOT_POSSIBLE,
@@ -777,6 +844,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       null,
       Accessibility.POSSIBLE,
@@ -886,6 +954,7 @@ class RouteRequestTransitDataProviderFilterTest {
     FeedScopedId tripId,
     Route route,
     BikeAccess bikeAccess,
+    CarAccess carAccess,
     TransitMode mode,
     String submode,
     Accessibility wheelchairBoarding,
@@ -897,6 +966,7 @@ class RouteRequestTransitDataProviderFilterTest {
       .withMode(mode)
       .withNetexSubmode(submode)
       .withBikesAllowed(bikeAccess)
+      .withCarsAllowed(carAccess)
       .withWheelchairBoarding(wheelchairBoarding)
       .withNetexAlteration(tripAlteration)
       .build();
@@ -915,6 +985,7 @@ class RouteRequestTransitDataProviderFilterTest {
       TRIP_ID,
       ROUTE,
       BikeAccess.NOT_ALLOWED,
+      CarAccess.NOT_ALLOWED,
       TransitMode.BUS,
       submode,
       Accessibility.NOT_POSSIBLE,
