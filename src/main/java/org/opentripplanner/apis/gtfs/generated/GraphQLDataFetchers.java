@@ -1283,7 +1283,6 @@ public class GraphQLDataFetchers {
     public DataFetcher<String> url();
   }
 
-  
   /** Vehicle rental station represents a location where users can rent bicycles etc. for a fee. */
   public interface GraphQLVehicleRentalStation {
     public DataFetcher<Boolean> allowDropoff();
