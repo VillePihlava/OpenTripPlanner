@@ -36,9 +36,6 @@ public enum StreetMode implements DocumentedEnum<StreetMode> {
   SCOOTER_RENTAL(Feature.ACCESS, Feature.EGRESS, Feature.WALKING, Feature.SCOOTER, Feature.RENTING),
   /**
    * Car only
-   * <p>
-   * Direct mode only.
-   * TODO not direct mode only
    */
   CAR(Feature.ACCESS, Feature.TRANSFER, Feature.EGRESS, Feature.DRIVING),
   /**

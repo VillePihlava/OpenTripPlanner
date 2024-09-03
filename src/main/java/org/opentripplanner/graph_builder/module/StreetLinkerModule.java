@@ -103,7 +103,7 @@ public class StreetLinkerModule implements GraphBuilderModule {
       );
     }
 
-    // The stops that are used by transport capable of transporting cars need to be connected to the road network (e.g. car ferries).
+    // The stops that are used by transit capable of transporting cars need to be connected to the road network (e.g. car ferries).
     Set<StopLocation> stopLocationsUsedForCarsAllowedTrips = Set.of();
     stopLocationsUsedForCarsAllowedTrips =
       transitModel

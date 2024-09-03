@@ -126,8 +126,7 @@ public class QualifiedModeSet implements Serializable {
             mBuilder.withEgressMode(StreetMode.CAR_HAILING);
             mBuilder.withDirectMode(StreetMode.WALK);
           } else {
-            // TODO withAccessMode, withTransferMode, and withEgressMode where set to StreetMode.WALK previously.
-            // does changing this break anything?
+            // Cars can use transit, for example, with car ferries.
             mBuilder.withAccessMode(StreetMode.CAR);
             mBuilder.withTransferMode(StreetMode.CAR);
             mBuilder.withEgressMode(StreetMode.CAR);
